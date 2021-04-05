@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="PQG">
+    <meta name="keywords" content="Conversor, hexadecimal">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Conversion a hexadecimal</title>
+
+<style>
+
+body{
+    text-align: center;
+    font-family: sans-serif, verdana;
+    background-color: #F0E68C;
+}
+
+h1{
+    text-align: center;
+    color: #DAA520;
+}
+
+label{
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+button{
+    margin: 15px;
+    margin-bottom: 2rem;
+    width: 180px;
+    height: 50px;
+    color:rgb(0, 0, 0);
+    background-color: #FFD700;
+    border: #FFFF00 2px solid;
+    font-size: 1.2rem;
+}
+</style>
+</head> 
+<body>
+
+  <h1>Programa que  convierte un valor base 10 a hexadecimal</h1>
+
+  <form >
+     <label >Introduce el numero</label>
+     <input type="text"   id="num" name="numero" value="">
+     <button type="button" onclick="Hexadecimal(num.value)">Hexadecimal</button>
+     <button type="button" onclick="limpiar()">Limpiar Todo</button>
+     <button type="button" onclick="cierra()">Cerrar ventana</button>
+  </form>
+
+  <script type="text/javascript">
+
+    function limpiar(){
+    lista=document.querySelectorAll('p');
+    if(lista.length!=0){
+        i=lista.length-1;
+        while(i>-1)
+             lista[i].parentNode.removeChild(lista[i--]);
+    }
+    else alert("No hay parrafos a eliminar");
+  }
+
+    function cierra(){
+  		if (confirm("¿Quieres cerrar la ventana?")){
+  			window.close();
+  		}
+    }
+
+      function Hexadecimal(numero){
+           var resultado = ConHe(numero);
+           parrafo = document.createElement("p");
+           contenido = document.createTextNode("El número"+numero+"a hexadecimal es "+resultado);  
+           parrafo.appendChild(contenido);
+           document.body.appendChild(parrafo);
+           document.getElementById("num").value="";
+        }
+
+  function ConHe(numero) {
+    var residuo = 0;
+    var hexadecimal = "";
+    var caracteresHexa = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+    while (numero > 0) {
+        residuo = numero % 16;
+        caracterHexa = caracteresHexa[residuo];
+        hexadecimal = caracterHexa + hexadecimal;
+        numero = Math.trunc(numero / 16);
+    }
+    return hexadecimal;
+  }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="PQG">
+    <meta name="keywords" content="Conversor, binario, hexadecimal">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Estilos/estilos.css">
+    <title> Conversion </title>
+</head> 
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="https://maferl21.github.io/PracticasEquipo7/">Principal</a></li>
+      <li><a href="../index.html">Inicio</a></li>
+      <li><a href="../Par_Impar/Par_Impar.html">Par e Impar</a></li>
+      <li><a href="convertidor.html"> Conversiones Binario/Hexadecimal </a></li>
+      <li><a href="../nuevaVentana/Abrir.html"> Nueva página </a></li>
+      <li><a href="../Tabla/ex_multiplicar.html"> Examen de tabla de multiplicar </a></li>
+      <li><a href="../Zodiaco/Zodiaco.html"> Sígno del zodiaco </a></li>
+      <li><a href="../ValidaDOMNumeroEnlaces/ValidaDOMNumeroEnlaces.html"> Validad DOM número enlaces </a></li>
+      <li><a href="../Muestra-OcultaParrafos-v2/Muestra-OcultaParrafos-v2.html"> Mostrar/Ocultar parrafos </a></li>
+      <li><a href="../AdivinaNumero/AdivinaNumero.html"> Adivinar el número </a></li>
+    </ul>
+    </nav><br>
+
+  <h1>Programa que  convierte un valor base 10 en binario y hexadecimal</h1>
+  <form >
+     <label >Introduce el numero</label>
+     <input type="text"   id="num" name="numero" value=""><br>
+     <button type="button" onclick="Binario(num.value)">Binario</button>
+     <button type="button" onclick="Hexadecimal(num.value)">Hexadecimal</button>
+     <button type="button" onclick="limpiar()">Limpiar Todo</button>
+  </form>
+
+  <script type="text/javascript">
+
+    function limpiar(){
+    lista=document.querySelectorAll('p');
+    if(lista.length!=0){
+        i=lista.length-1;
+        while(i>-1)
+             lista[i].parentNode.removeChild(lista[i--]);
+    }
+    else alert("No hay parrafos a eliminar");
+  }
+
+    function Binario(numero){
+         var resultado = ConBi(numero);
+         parrafo = document.createElement("p");
+         contenido = document.createTextNode("El número"+numero+"a binario es "+resultado);  
+         parrafo.appendChild(contenido);
+         document.body.appendChild(parrafo);
+         document.getElementById("num").value="";
+      }
+
+      function Hexadecimal(numero){
+           var resultado = ConHe(numero);
+           parrafo = document.createElement("p");
+           contenido = document.createTextNode("El número"+numero+"a hexadecimal es "+resultado);  
+           parrafo.appendChild(contenido);
+           document.body.appendChild(parrafo);
+           document.getElementById("num").value="";
+        }
+
+  function ConBi(numero) {
+    var binario = "";
+       while (numero > 0) {
+         binario = numero % 2 + binario;
+         numero = Math.trunc(numero / 2);
+       }
+        return binario;
+   }
+
+  function ConHe(numero) {
+    var residuo = 0;
+    var hexadecimal = "";
+    var caracteresHexa = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+    while (numero > 0) {
+        residuo = numero % 16;
+        caracterHexa = caracteresHexa[residuo];
+        hexadecimal = caracterHexa + hexadecimal;
+        numero = Math.trunc(numero / 16);
+    }
+    return hexadecimal;
+  }
+
+</script>
+</body>
+</html>
